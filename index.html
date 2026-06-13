@@ -9,62 +9,87 @@
   <meta property="og:description" content="Convert design tokens to CSS, Tailwind, or SASS instantly.">
   <meta property="og:image" content="https://kvnlnk.github.io/designtok/og-image.png">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#0d1117">
+  <meta name="theme-color" content="#120c08">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,SOFT,WONK@0,9..144,0..100,0..1;1,9..144,0..100,0..1&family=DM+Sans:opsz,wght@9..40,300..700&family=JetBrains+Mono:wght@350..700&display=swap" rel="stylesheet">
 
 <style>
 /* ============================================================
-   Custom Properties (Design Tokens for the app itself)
+   designtok — "The Workshop" aesthetic
+   Warm, tactile, industrial-atelier. Brass, ink, and paper.
    ============================================================ */
-:root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f6f8fa;
-  --bg-tertiary: #e8eaed;
-  --bg-card: #ffffff;
-  --text-primary: #1f2328;
-  --text-secondary: #656d76;
-  --text-muted: #8b949e;
-  --border-color: #d0d7de;
-  --border-focus: #58a6ff;
-  --accent: #0969da;
-  --accent-hover: #0550ae;
-  --accent-glow: rgba(9, 105, 218, 0.15);
-  --error: #cf222e;
-  --error-bg: #ffebe9;
-  --success: #1a7f37;
-  --success-bg: #dafbe1;
-  --code-bg: #f6f8fa;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
-  --shadow-md: 0 2px 8px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Liberation Mono', Menlo, monospace;
-  --transition: 180ms ease;
+
+/* --- Noise texture --- */
+:root::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
 }
 
-[data-theme="dark"] {
-  --bg-primary: #0d1117;
-  --bg-secondary: #161b22;
-  --bg-tertiary: #21262d;
-  --bg-card: #161b22;
-  --text-primary: #e6edf3;
-  --text-secondary: #8b949e;
-  --text-muted: #6e7681;
-  --border-color: #30363d;
-  --border-focus: #58a6ff;
-  --accent: #58a6ff;
-  --accent-hover: #79c0ff;
-  --accent-glow: rgba(88, 166, 255, 0.15);
-  --error: #f85149;
-  --error-bg: rgba(248, 81, 73, 0.1);
-  --success: #3fb950;
-  --success-bg: rgba(63, 185, 80, 0.1);
-  --code-bg: #0d1117;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
-  --shadow-md: 0 2px 8px rgba(0,0,0,0.4);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+/* ============================================================
+   Custom Properties
+   ============================================================ */
+:root {
+  --bg-deep: #120c08;
+  --bg-surface: #1a140e;
+  --bg-card: #1e1812;
+  --bg-elevated: #241e17;
+  --bg-input: #16100a;
+  --border-subtle: #2c241d;
+  --border-accent: #3d3026;
+  --text-primary: #e8ddd0;
+  --text-secondary: #a09080;
+  --text-muted: #706050;
+  --accent: #d96c3a;
+  --accent-glow: rgba(217, 108, 58, 0.15);
+  --accent-hover: #e8804e;
+  --accent-amber: #b8845c;
+  --amber-glow: rgba(184, 132, 92, 0.12);
+  --error: #d65a5a;
+  --error-bg: rgba(214, 90, 90, 0.1);
+  --success: #8bb87c;
+  --success-bg: rgba(139, 184, 124, 0.1);
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-card: 0 2px 12px rgba(0,0,0,0.4);
+  --shadow-glow: 0 0 0 1px var(--accent);
+  --transition: 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-theme="light"] {
+  --bg-deep: #e8e0d4;
+  --bg-surface: #f0eae0;
+  --bg-card: #f8f2e8;
+  --bg-elevated: #fcf6ec;
+  --bg-input: #ede6da;
+  --border-subtle: #d4cabc;
+  --border-accent: #c4b8a8;
+  --text-primary: #1a1410;
+  --text-secondary: #5a4c3e;
+  --text-muted: #9a8c7c;
+  --accent: #b84e20;
+  --accent-glow: rgba(184, 78, 32, 0.12);
+  --accent-hover: #d45c28;
+  --accent-amber: #8a6a4a;
+  --amber-glow: rgba(138, 106, 74, 0.1);
+  --error: #c43838;
+  --error-bg: rgba(196, 56, 56, 0.08);
+  --success: #5a8a4c;
+  --success-bg: rgba(90, 138, 76, 0.08);
+  --shadow-card: 0 2px 12px rgba(0,0,0,0.06);
 }
 
 /* ============================================================
@@ -83,20 +108,24 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: var(--bg-primary);
+  font-weight: 400;
+  background: var(--bg-deep);
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
   transition: background var(--transition), color var(--transition);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ============================================================
    Layout
    ============================================================ */
 .app-container {
-  max-width: 880px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 24px 16px 48px;
+  padding: 32px 20px 56px;
+  position: relative;
 }
 
 /* ============================================================
@@ -104,93 +133,143 @@ body {
    ============================================================ */
 .app-header {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 32px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  animation: slideUp 600ms var(--ease-out) both;
 }
 
 .header-brand {
   display: flex;
   flex-direction: column;
+  gap: 6px;
 }
 
 .app-title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  font-weight: 400;
+  font-variation-settings: 'SOFT' 80, 'WONK' 0;
+  letter-spacing: -0.01em;
   color: var(--text-primary);
+  line-height: 1.1;
 }
 
 .app-title span {
   color: var(--accent);
+  font-style: italic;
+  font-variation-settings: 'SOFT' 100, 'WONK' 1;
 }
 
 .tagline {
-  font-size: 0.875rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 350;
   color: var(--text-secondary);
-  margin-top: 2px;
+  letter-spacing: 0.01em;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .theme-toggle {
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
   width: 40px;
   height: 40px;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
-  transition: background var(--transition), border-color var(--transition), transform var(--transition);
-  flex-shrink: 0;
+  font-size: 1rem;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition), color var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent-glow);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.theme-toggle:hover::after {
+  opacity: 1;
 }
 
 .theme-toggle:hover {
-  background: var(--border-color);
-  transform: scale(1.05);
+  border-color: var(--border-accent);
+  transform: translateY(-1px);
 }
 
 .theme-toggle:active {
-  transform: scale(0.95);
+  transform: scale(0.93);
 }
 
 /* ============================================================
-   Card
+   Cards
    ============================================================ */
 .card {
   background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: var(--shadow-sm);
-  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-card);
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  position: relative;
+  animation: slideUp 600ms var(--ease-out) both;
 }
 
-.card:focus-within {
-  box-shadow: var(--shadow-md), 0 0 0 1px var(--border-focus);
-  border-color: var(--border-focus);
+.card:nth-child(2) { animation-delay: 120ms; }
+.card:nth-child(3) { animation-delay: 240ms; }
+
+/* Decorative left border accent */
+.card::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 16px;
+  bottom: 16px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent-amber));
+  border-radius: 2px;
+  opacity: 0.4;
+  transition: opacity var(--transition);
+}
+
+.card:focus-within::before,
+.card:hover::before {
+  opacity: 0.8;
 }
 
 .card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
-  gap: 8px;
+  margin-bottom: 16px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .card-title {
-  font-size: 0.8125rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  color: var(--accent-amber);
 }
 
 /* ============================================================
@@ -200,64 +279,78 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 16px;
-  font-size: 0.875rem;
+  padding: 8px 18px;
+  font-size: 0.8125rem;
   font-weight: 500;
-  font-family: inherit;
+  font-family: var(--font-sans);
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--transition);
   border: 1px solid transparent;
   white-space: nowrap;
   user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.06);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.btn:hover::after {
+  opacity: 1;
 }
 
 .btn-primary {
   background: var(--accent);
-  color: #ffffff;
+  color: #fcf6ec;
   border-color: var(--accent);
 }
 
 .btn-primary:hover {
   background: var(--accent-hover);
   border-color: var(--accent-hover);
+  transform: translateY(-1px);
 }
 
 .btn-primary:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
 .btn-secondary {
-  background: var(--bg-tertiary);
-  color: var(--text-primary);
-  border-color: var(--border-color);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  border-color: var(--border-subtle);
 }
 
 .btn-secondary:hover {
-  background: var(--border-color);
+  color: var(--text-primary);
+  border-color: var(--border-accent);
+  transform: translateY(-1px);
 }
 
 .btn-secondary:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
 .btn-success {
   background: var(--success);
-  color: #ffffff;
+  color: #fcf6ec;
   border-color: var(--success);
 }
 
-.btn-success:active {
-  transform: scale(0.97);
-}
-
 .btn-sm {
-  padding: 6px 12px;
-  font-size: 0.8125rem;
+  padding: 6px 14px;
+  font-size: 0.75rem;
 }
 
 /* ============================================================
-   Textarea
+   Textareas
    ============================================================ */
 .textarea-wrapper {
   position: relative;
@@ -266,37 +359,40 @@ body {
 textarea {
   width: 100%;
   min-height: 200px;
-  padding: 14px 16px;
+  padding: 16px 18px;
   font-family: var(--font-mono);
-  font-size: 0.875rem;
-  line-height: 1.55;
+  font-size: 0.8125rem;
+  font-weight: 350;
+  line-height: 1.6;
   color: var(--text-primary);
-  background: var(--code-bg);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
   resize: vertical;
   outline: none;
-  transition: border-color var(--transition), background var(--transition);
+  transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
   tab-size: 2;
 }
 
 textarea:focus {
-  border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px var(--accent-glow);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-glow);
 }
 
 textarea::placeholder {
   color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-weight: 400;
 }
 
 textarea[readonly] {
   cursor: default;
-  background: var(--bg-secondary);
+  background: var(--bg-surface);
 }
 
 textarea.has-error {
   border-color: var(--error);
-  box-shadow: 0 0 0 3px rgba(248, 81, 73, 0.15);
+  box-shadow: 0 0 0 2px var(--error-bg);
 }
 
 /* ============================================================
@@ -304,14 +400,16 @@ textarea.has-error {
    ============================================================ */
 .error-message {
   display: none;
-  margin-top: 8px;
-  padding: 8px 12px;
+  margin-top: 10px;
+  padding: 10px 14px;
   font-size: 0.8125rem;
   color: var(--error);
   background: var(--error-bg);
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(248, 81, 73, 0.2);
+  border: 1px solid rgba(214, 90, 90, 0.2);
   word-break: break-word;
+  font-family: var(--font-sans);
+  animation: fadeSlide 200ms var(--ease-out) both;
 }
 
 .error-message.visible {
@@ -319,15 +417,15 @@ textarea.has-error {
 }
 
 /* ============================================================
-   Format Selector (Radio Buttons)
+   Format Selector — Workshop Tags
    ============================================================ */
 .format-selector {
   display: flex;
-  gap: 4px;
-  background: var(--bg-tertiary);
-  padding: 4px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
+  gap: 2px;
+  background: var(--bg-elevated);
+  padding: 3px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
 }
 
 .format-option {
@@ -339,47 +437,54 @@ textarea.has-error {
   opacity: 0;
   width: 0;
   height: 0;
+  pointer-events: none;
 }
 
 .format-option label {
   display: block;
-  padding: 7px 16px;
-  font-size: 0.8125rem;
+  padding: 7px 18px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
   font-weight: 500;
-  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-muted);
   background: transparent;
-  border-radius: calc(var(--radius-sm) - 1px);
+  border-radius: 2px;
   cursor: pointer;
   transition: all var(--transition);
   user-select: none;
+  position: relative;
 }
 
 .format-option input:checked + label {
-  color: var(--text-primary);
+  color: var(--accent);
   background: var(--bg-card);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 
 .format-option label:hover {
-  color: var(--text-primary);
+  color: var(--text-secondary);
 }
 
 .format-option input:focus-visible + label {
-  outline: 2px solid var(--border-focus);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
 /* ============================================================
-   Copy Button
+   Copy Container
    ============================================================ */
 .copy-container {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .copy-feedback {
-  font-size: 0.8125rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
   color: var(--success);
   opacity: 0;
   transition: opacity var(--transition);
@@ -402,25 +507,118 @@ textarea.has-error {
 }
 
 /* ============================================================
+   Footer
+   ============================================================ */
+.app-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  animation: fadeIn 600ms var(--ease-out) 400ms both;
+}
+
+.app-footer a {
+  color: var(--accent-amber);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.app-footer a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   Theme toggle icon swap
+   ============================================================ */
+[data-theme="dark"] .theme-toggle .light-icon { display: none; }
+[data-theme="dark"] .theme-toggle .dark-icon { display: inline; }
+[data-theme="light"] .theme-toggle .light-icon { display: inline; }
+[data-theme="light"] .theme-toggle .dark-icon { display: none; }
+
+/* ============================================================
+   Scrollbar
+   ============================================================ */
+textarea::-webkit-scrollbar { width: 6px; }
+textarea::-webkit-scrollbar-track { background: transparent; }
+textarea::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 3px;
+}
+textarea::-webkit-scrollbar-thumb:hover {
+  background: var(--border-accent);
+}
+
+/* ============================================================
    Responsive
    ============================================================ */
-@media (max-width: 640px) {
+@media (max-width: 600px) {
   .app-container {
-    padding: 16px 12px 32px;
+    padding: 20px 14px 36px;
+  }
+
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+  }
+
+  .header-actions {
+    align-self: flex-end;
+    margin-top: -44px;
   }
 
   .app-title {
-    font-size: 1.4rem;
+    font-size: 1.7rem;
   }
 
   .card {
-    padding: 14px;
+    padding: 16px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   textarea {
-    min-height: 150px;
-    font-size: 0.8125rem;
-    padding: 10px 12px;
+    min-height: 140px;
+    font-size: 0.75rem;
+    padding: 12px 14px;
   }
 
   .format-selector {
@@ -433,13 +631,8 @@ textarea.has-error {
 
   .format-option label {
     text-align: center;
-    padding: 7px 8px;
-    font-size: 0.75rem;
-  }
-
-  .card-header {
-    flex-direction: column;
-    align-items: flex-start;
+    padding: 6px 8px;
+    font-size: 0.7rem;
   }
 
   .copy-container {
@@ -457,85 +650,32 @@ textarea.has-error {
   }
 }
 
-@media (min-width: 641px) and (max-width: 1024px) {
+@media (min-width: 601px) and (max-width: 1024px) {
   .app-container {
-    padding: 24px 24px 48px;
+    padding: 28px 24px 48px;
   }
 }
 
 @media (min-width: 1025px) {
   .app-container {
-    padding: 32px 24px 64px;
+    padding: 40px 32px 72px;
+  }
+
+  textarea {
+    min-height: 240px;
   }
 }
 
-/* ============================================================
-   Utilities
-   ============================================================ */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+/* Selection */
+::selection {
+  background: var(--accent-glow);
+  color: var(--text-primary);
 }
 
-/* ============================================================
-   Scrollbar (dark theme)
-   ============================================================ */
-[data-theme="dark"] textarea::-webkit-scrollbar {
-  width: 8px;
-}
-
-[data-theme="dark"] textarea::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-  border-radius: 4px;
-}
-
-[data-theme="dark"] textarea::-webkit-scrollbar-thumb {
-  background: var(--border-color);
-  border-radius: 4px;
-}
-
-[data-theme="dark"] textarea::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
-}
-
-/* ============================================================
-   Footer
-   ============================================================ */
-.app-footer {
-  margin-top: 32px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border-color);
-  text-align: center;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
-
-.app-footer a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.app-footer a:hover {
-  text-decoration: underline;
-}
-
-/* ============================================================
-   Animations
-   ============================================================ */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.error-message.visible {
-  animation: fadeIn 200ms ease forwards;
+/* Focus visible */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 </style>
 </head>
@@ -548,9 +688,12 @@ textarea.has-error {
       <h1 class="app-title">design<span>tok</span></h1>
       <p class="tagline">Convert design tokens to CSS, Tailwind, or SASS</p>
     </div>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
-      <span id="themeIcon">🌙</span>
-    </button>
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+        <span class="dark-icon">☽</span>
+        <span class="light-icon">⊙</span>
+      </button>
+    </div>
   </header>
 
   <!-- ====== Input Section ====== -->
@@ -558,12 +701,12 @@ textarea.has-error {
     <div class="card-header">
       <span class="card-title">Input — JSON Design Tokens</span>
       <div class="toolbar">
-        <button class="btn btn-secondary btn-sm" id="sampleBtn" title="Load sample tokens">📋 Sample</button>
+        <button class="btn btn-secondary btn-sm" id="sampleBtn" title="Load sample tokens">↺ Sample</button>
       </div>
     </div>
     <div class="textarea-wrapper">
       <textarea id="inputArea"
-        placeholder='{\n  &quot;colors&quot;: {\n    &quot;primary&quot;: &quot;#3b82f6&quot;,\n    &quot;secondary&quot;: &quot;#8b5cf6&quot;\n  },\n  &quot;spacing&quot;: {\n    &quot;md&quot;: &quot;1rem&quot;\n  }\n}'
+        placeholder='{&#10;  "colors": {&#10;    "primary": "#3b82f6",&#10;    "secondary": "#8b5cf6"&#10;  },&#10;  "spacing": {&#10;    "md": "1rem"&#10;  }&#10;}'
         spellcheck="false"
       ></textarea>
     </div>
@@ -575,7 +718,7 @@ textarea.has-error {
     <div class="card-header">
       <span class="card-title">Output</span>
       <div class="copy-container">
-        <span class="copy-feedback" id="copyFeedback">Copied!</span>
+        <span class="copy-feedback" id="copyFeedback">Copied</span>
         <div class="format-selector" role="radiogroup" aria-label="Output format">
           <div class="format-option">
             <input type="radio" name="format" id="fmtCss" value="css" checked>
@@ -590,7 +733,7 @@ textarea.has-error {
             <label for="fmtSass">SASS</label>
           </div>
         </div>
-        <button class="btn btn-primary btn-sm" id="copyBtn" title="Copy to clipboard">📋 Copy</button>
+        <button class="btn btn-primary btn-sm" id="copyBtn" title="Copy to clipboard">⤢ Copy</button>
       </div>
     </div>
     <div class="textarea-wrapper">
@@ -607,7 +750,7 @@ textarea.has-error {
 <script>
 /* ============================================================
    designtok — Vanilla JS App
-   Zero dependencies, works offline, single-file.
+   Zero dependencies, works offline.
    ============================================================ */
 (function() {
   'use strict';
@@ -620,11 +763,10 @@ textarea.has-error {
   const copyBtn      = document.getElementById('copyBtn');
   const copyFeedback = document.getElementById('copyFeedback');
   const themeToggle  = document.getElementById('themeToggle');
-  const themeIcon    = document.getElementById('themeIcon');
   const formatRadios = document.querySelectorAll('input[name="format"]');
 
   // ---- Sample design tokens ----
-  var SAMPLE_TOKENS = {
+  const SAMPLE_TOKENS = {
     "colors": {
       "primary": "#3b82f6",
       "primary-dark": "#2563eb",
@@ -649,99 +791,66 @@ textarea.has-error {
       "info": "#3b82f6"
     },
     "spacing": {
-      "xs": "0.25rem",
-      "sm": "0.5rem",
-      "md": "1rem",
-      "lg": "1.5rem",
-      "xl": "2rem",
-      "2xl": "3rem",
-      "3xl": "4rem"
+      "xs": "0.25rem", "sm": "0.5rem", "md": "1rem",
+      "lg": "1.5rem", "xl": "2rem", "2xl": "3rem", "3xl": "4rem"
     },
     "typography": {
       "fontFamily": {
-        "sans": "Inter, system-ui, -apple-system, sans-serif",
+        "sans": "Inter, system-ui, sans-serif",
         "serif": "Merriweather, Georgia, serif",
         "mono": "JetBrains Mono, 'Fira Code', monospace"
       },
       "fontSize": {
-        "xs": "0.75rem",
-        "sm": "0.875rem",
-        "base": "1rem",
-        "lg": "1.125rem",
-        "xl": "1.25rem",
-        "2xl": "1.5rem",
-        "3xl": "1.875rem",
-        "4xl": "2.25rem"
+        "xs": "0.75rem", "sm": "0.875rem", "base": "1rem",
+        "lg": "1.125rem", "xl": "1.25rem", "2xl": "1.5rem",
+        "3xl": "1.875rem", "4xl": "2.25rem"
       },
       "fontWeight": {
-        "normal": "400",
-        "medium": "500",
-        "semibold": "600",
-        "bold": "700"
+        "normal": "400", "medium": "500", "semibold": "600", "bold": "700"
       },
       "lineHeight": {
-        "tight": "1.25",
-        "normal": "1.5",
-        "relaxed": "1.75"
+        "tight": "1.25", "normal": "1.5", "relaxed": "1.75"
       }
     },
     "shadows": {
       "sm": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
       "md": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)",
       "lg": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)",
-      "xl": "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
-      "inner": "inset 0 2px 4px 0 rgba(0, 0, 0, 0.05)"
+      "xl": "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)"
     },
     "borderRadius": {
-      "none": "0",
-      "sm": "0.125rem",
-      "md": "0.375rem",
-      "lg": "0.5rem",
-      "xl": "0.75rem",
-      "2xl": "1rem",
-      "full": "9999px"
+      "none": "0", "sm": "0.125rem", "md": "0.375rem",
+      "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"
     },
     "breakpoints": {
-      "sm": "640px",
-      "md": "768px",
-      "lg": "1024px",
-      "xl": "1280px",
-      "2xl": "1536px"
+      "sm": "640px", "md": "768px", "lg": "1024px", "xl": "1280px", "2xl": "1536px"
     }
   };
 
   // ---- Theme state ----
-  var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+  let currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
 
   // ---- Helpers ----
 
-  /** Debounce a function call */
   function debounce(fn, ms) {
-    var timer;
+    let timer;
     return function() {
-      var ctx = this;
-      var args = arguments;
+      const ctx = this, args = arguments;
       clearTimeout(timer);
-      timer = setTimeout(function() { fn.apply(ctx, args); }, ms);
+      timer = setTimeout(() => fn.apply(ctx, args), ms);
     };
   }
 
-  /**
-   * Flatten a nested object into dot-notation key-value pairs.
-   * { colors: { primary: "#06f" } } → { "colors.primary": "#06f" }
-   */
   function flatten(obj, prefix) {
-    var result = {};
-    for (var key in obj) {
+    const result = {};
+    for (const key in obj) {
       if (!Object.prototype.hasOwnProperty.call(obj, key)) continue;
-      var prefixed = prefix ? prefix + '.' + key : key;
-      var val = obj[key];
+      const prefixed = prefix ? prefix + '.' + key : key;
+      const val = obj[key];
       if (val !== null && typeof val === 'object' && !Array.isArray(val)) {
-        var sub = flatten(val, prefixed);
-        for (var sk in sub) {
-          if (Object.prototype.hasOwnProperty.call(sub, sk)) {
-            result[sk] = sub[sk];
-          }
+        const sub = flatten(val, prefixed);
+        for (const sk in sub) {
+          if (Object.prototype.hasOwnProperty.call(sub, sk)) result[sk] = sub[sk];
         }
       } else {
         result[prefixed] = String(val);
@@ -750,22 +859,16 @@ textarea.has-error {
     return result;
   }
 
-  /**
-   * Build a nested object from dot-notation keys.
-   * { "colors.primary": "#06f" } → { colors: { primary: "#06f" } }
-   */
   function unflatten(flat) {
-    var root = {};
-    for (var key in flat) {
+    const root = {};
+    for (const key in flat) {
       if (!Object.prototype.hasOwnProperty.call(flat, key)) continue;
-      var value = flat[key];
-      var parts = key.split('.');
-      var current = root;
-      for (var i = 0; i < parts.length - 1; i++) {
-        var part = parts[i];
-        if (!current[part] || typeof current[part] !== 'object') {
-          current[part] = {};
-        }
+      const value = flat[key];
+      const parts = key.split('.');
+      let current = root;
+      for (let i = 0; i < parts.length - 1; i++) {
+        const part = parts[i];
+        if (!current[part] || typeof current[part] !== 'object') current[part] = {};
         current = current[part];
       }
       current[parts[parts.length - 1]] = value;
@@ -773,30 +876,25 @@ textarea.has-error {
     return root;
   }
 
-  /**
-   * Replace dots with hyphens and lowercase for use as CSS/SASS identifiers.
-   */
   function normalizeKey(key) {
     return key.replace(/\./g, '-').toLowerCase();
   }
 
-  // ---- Parse input JSON ----
   function parseInput(jsonStr) {
-    var parsed = JSON.parse(jsonStr);
+    const parsed = JSON.parse(jsonStr);
     if (parsed === null || typeof parsed !== 'object' || Array.isArray(parsed)) {
       throw new Error('Input must be a JSON object (key-value pairs).');
     }
     return parsed;
   }
 
-  /** Format JSON error with line number hint */
   function formatJsonError(err, jsonStr) {
-    var msg = err.message || 'Invalid JSON';
+    let msg = err.message || 'Invalid JSON';
     if (err instanceof SyntaxError) {
-      var m = msg.match(/position\s+(\d+)/i);
+      const m = msg.match(/position\s+(\d+)/i);
       if (m) {
-        var pos = parseInt(m[1], 10);
-        var line = (jsonStr.slice(0, pos).match(/\n/g) || []).length + 1;
+        const pos = parseInt(m[1], 10);
+        const line = (jsonStr.slice(0, pos).match(/\n/g) || []).length + 1;
         return 'JSON parse error at line ' + line + ': ' + msg;
       }
     }
@@ -807,73 +905,42 @@ textarea.has-error {
   // CONVERTERS
   // ================================================================
 
-  // ---- 1. CSS Custom Properties ----
-  //   :root {
-  //     --colors-primary: #3b82f6;
-  //     --colors-primary-dark: #2563eb;
-  //   }
   function convertToCss(flat) {
-    var lines = [':root {'];
-    var keys = Object.keys(flat).sort();
-    for (var i = 0; i < keys.length; i++) {
-      lines.push('  --' + normalizeKey(keys[i]) + ': ' + flat[keys[i]] + ';');
+    const lines = [':root {'];
+    const keys = Object.keys(flat).sort();
+    for (const key of keys) {
+      lines.push('  --' + normalizeKey(key) + ': ' + flat[key] + ';');
     }
     lines.push('}');
     return lines.join('\n') + '\n';
   }
 
-  // ---- 2. Tailwind CSS Config ----
-  //   module.exports = {
-  //     theme: {
-  //       extend: {
-  //         colors: { primary: '#3b82f6', ... },
-  //         spacing: { md: '1rem', ... }
-  //       }
-  //     }
-  //   };
   function convertToTailwind(flat) {
-    // Rebuild nested structure from flattened dot-notation keys.
-    // For Tailwind, dots mean nesting, hyphens stay as hyphens in leaf keys.
-    var nested = unflatten(flat);
-
-    // Add a trailing comma after the last item in an object
-    var INDENT = '  ';
+    const nested = unflatten(flat);
+    const INDENT = '  ';
 
     function renderValue(val, depth) {
       if (val === null) return 'null';
       if (typeof val === 'boolean') return val ? 'true' : 'false';
       if (typeof val === 'number') return String(val);
+      if (typeof val === 'string') return "'" + val.replace(/'/g, "\\'") + "'";
 
-      // String — wrap in single quotes
-      if (typeof val === 'string') {
-        // Escape single quotes inside the string
-        return "'" + val.replace(/'/g, "\\'") + "'";
-      }
-
-      // Object — render recursively
-      var keys = Object.keys(val);
+      const keys = Object.keys(val);
       if (keys.length === 0) return '{}';
 
-      var pad = INDENT.repeat(depth);
-      var innerPad = INDENT.repeat(depth + 1);
-      var parts = ['{'];
-      for (var i = 0; i < keys.length; i++) {
-        var k = keys[i];
-        var v = val[k];
-        // Quote key if it contains characters unsafe for JS identifiers
-        var formattedKey = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(k) ? k : "'" + k.replace(/'/g, "\\'") + "'";
-        parts.push(innerPad + formattedKey + ': ' + renderValue(v, depth + 1) + ',');
+      const innerPad = INDENT.repeat(depth + 1);
+      const parts = ['{'];
+      for (const k of keys) {
+        const v = val[k];
+        const fk = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(k) ? k : "'" + k.replace(/'/g, "\\'") + "'";
+        parts.push(innerPad + fk + ': ' + renderValue(v, depth + 1) + ',');
       }
-      parts.push(pad + '}');
+      parts.push(INDENT.repeat(depth) + '}');
       return parts.join('\n');
     }
 
-    var body = renderValue(nested, 1);
-    // Indent the body to sit under "extend:"
-    var indentedBody = body.split('\n').map(function(line) {
-      return INDENT + line;
-    }).join('\n');
-
+    const body = renderValue(nested, 1);
+    const indentedBody = body.split('\n').map(l => INDENT + l).join('\n');
     return 'module.exports = {\n' +
            INDENT + 'theme: {\n' +
            INDENT + INDENT + 'extend: ' + indentedBody.trim() + '\n' +
@@ -881,22 +948,18 @@ textarea.has-error {
            '};\n';
   }
 
-  // ---- 3. SASS Variables ----
-  //   $colors-primary: #3b82f6;
   function convertToSass(flat) {
-    var lines = [];
-    var keys = Object.keys(flat).sort();
-    for (var i = 0; i < keys.length; i++) {
-      lines.push('$' + normalizeKey(keys[i]) + ': ' + flat[keys[i]] + ';');
+    const lines = [];
+    const keys = Object.keys(flat).sort();
+    for (const key of keys) {
+      lines.push('$' + normalizeKey(key) + ': ' + flat[key] + ';');
     }
     return lines.join('\n') + '\n';
   }
 
-  // ---- Main convert dispatcher ----
   function convert(jsonStr, format) {
-    var parsed = parseInput(jsonStr);
-    var flat = flatten(parsed, '');
-
+    const parsed = parseInput(jsonStr);
+    const flat = flatten(parsed, '');
     switch (format) {
       case 'css':      return convertToCss(flat);
       case 'tailwind': return convertToTailwind(flat);
@@ -905,15 +968,13 @@ textarea.has-error {
     }
   }
 
-  // ---- Get currently selected format ----
   function getSelectedFormat() {
-    for (var i = 0; i < formatRadios.length; i++) {
-      if (formatRadios[i].checked) return formatRadios[i].value;
+    for (const radio of formatRadios) {
+      if (radio.checked) return radio.value;
     }
     return 'css';
   }
 
-  // ---- Show error ----
   function showError(msg) {
     errorMsg.textContent = msg;
     errorMsg.classList.add('visible');
@@ -921,69 +982,57 @@ textarea.has-error {
     outputArea.value = '';
   }
 
-  // ---- Clear error ----
   function clearError() {
     errorMsg.textContent = '';
     errorMsg.classList.remove('visible');
     inputArea.classList.remove('has-error');
   }
 
-  // ---- Run conversion and update output ----
   function runConversion() {
-    var jsonStr = inputArea.value.trim();
+    const jsonStr = inputArea.value.trim();
     if (!jsonStr) {
       clearError();
       outputArea.value = '';
       return;
     }
-
     try {
       clearError();
-      var format = getSelectedFormat();
-      var result = convert(jsonStr, format);
-      outputArea.value = result;
+      const format = getSelectedFormat();
+      outputArea.value = convert(jsonStr, format);
     } catch (err) {
       showError(formatJsonError(err, jsonStr));
     }
   }
 
-  // ---- Debounced conversion (300ms) ----
-  var debouncedConvert = debounce(runConversion, 300);
+  const debouncedConvert = debounce(runConversion, 300);
 
-  // ---- Copy to clipboard ----
   function copyOutput() {
-    var text = outputArea.value;
+    const text = outputArea.value;
     if (!text) return;
 
-    var setCopied = function() {
+    const setCopied = () => {
       copyFeedback.classList.add('visible');
-      copyBtn.textContent = '✅ Copied!';
+      copyBtn.textContent = '✓ Copied';
       copyBtn.classList.remove('btn-primary');
       copyBtn.classList.add('btn-success');
-
-      setTimeout(function() {
+      setTimeout(() => {
         copyFeedback.classList.remove('visible');
-        copyBtn.textContent = '📋 Copy';
+        copyBtn.textContent = '⤢ Copy';
         copyBtn.classList.remove('btn-success');
         copyBtn.classList.add('btn-primary');
       }, 2000);
     };
 
-    // Primary: modern clipboard API
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(setCopied).catch(function() {
-        // fall through to fallback
-        fallbackCopy(text, setCopied);
-      });
+      navigator.clipboard.writeText(text).then(setCopied).catch(() => fallbackCopy(text, setCopied));
     } else {
       fallbackCopy(text, setCopied);
     }
   }
 
-  /** Legacy copy fallback using execCommand */
   function fallbackCopy(text, onSuccess) {
     try {
-      var ta = document.createElement('textarea');
+      const ta = document.createElement('textarea');
       ta.value = text;
       ta.style.position = 'fixed';
       ta.style.left = '-9999px';
@@ -993,62 +1042,50 @@ textarea.has-error {
       document.body.appendChild(ta);
       ta.select();
       ta.setSelectionRange(0, text.length);
-      var ok = document.execCommand('copy');
+      const ok = document.execCommand('copy');
       document.body.removeChild(ta);
-      if (ok) { onSuccess(); }
-    } catch (e) {
-      // silently fail — clipboard unavailable
-    }
+      if (ok) onSuccess();
+    } catch (_) {}
   }
 
-  // ---- Load sample tokens ----
   function loadSample() {
     inputArea.value = JSON.stringify(SAMPLE_TOKENS, null, 2);
+    inputArea.style.height = 'auto';
+    inputArea.style.height = Math.min(inputArea.scrollHeight, 480) + 'px';
     clearError();
     runConversion();
   }
 
-  // ---- Theme toggle ----
   function toggleTheme() {
-    var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', newTheme);
     currentTheme = newTheme;
-    themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
-    try { localStorage.setItem('designtok-theme', newTheme); } catch (e) { /* noop */ }
+    try { localStorage.setItem('designtok-theme', newTheme); } catch (_) {}
   }
 
-  // ---- Restore saved theme ----
   function restoreTheme() {
     try {
-      var saved = localStorage.getItem('designtok-theme');
+      const saved = localStorage.getItem('designtok-theme');
       if (saved === 'light' || saved === 'dark') {
         document.documentElement.setAttribute('data-theme', saved);
         currentTheme = saved;
-        themeIcon.textContent = saved === 'dark' ? '🌙' : '☀️';
       }
-    } catch (e) { /* noop */ }
+    } catch (_) {}
   }
 
-  // ---- Init ----
   function init() {
     restoreTheme();
-
-    // Pre-fill with sample tokens
     loadSample();
 
-    // Event listeners
     inputArea.addEventListener('input', debouncedConvert);
-
-    for (var i = 0; i < formatRadios.length; i++) {
-      formatRadios[i].addEventListener('change', runConversion);
+    for (const radio of formatRadios) {
+      radio.addEventListener('change', runConversion);
     }
-
     sampleBtn.addEventListener('click', loadSample);
     copyBtn.addEventListener('click', copyOutput);
     themeToggle.addEventListener('click', toggleTheme);
 
-    // Keyboard shortcut: Cmd/Ctrl+Shift+C → copy
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', (e) => {
       if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === 'C') {
         e.preventDefault();
         copyOutput();
@@ -1056,13 +1093,11 @@ textarea.has-error {
     });
   }
 
-  // Go
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
-
 })();
 </script>
 </body>
